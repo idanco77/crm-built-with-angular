@@ -1,0 +1,126 @@
+<app-page-header
+  [childHeaderTitle]="parentHeaderTitle"
+  [childHeaderIcon]="parentHeaderIcon"
+>
+</app-page-header>
+<!-- ... ... ... -->
+<div class="row">
+  <div class="col-6 col-md-3">
+    <label for="searchFirstName" class="sr-only">First name</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <input
+        [(ngModel)]="firstName"
+        (keyup)="onSearch('firstName')"
+        class="form-control" type="text" name="searchFirstName" id="searchFirstName"
+        placeholder="First Name"
+      >
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <label for="searchLastName" class="sr-only">Last name</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <input
+        [(ngModel)]="lastName"
+        (keyup)="onSearch('lastName')"
+        class="form-control" type="text" name="searchLastName" id="searchLastName"
+        placeholder="Last Name"
+      >
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <label for="searchPhone" class="sr-only">Phone</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <input
+        [(ngModel)]="phone"
+        (keyup)="onSearch('phone')"
+        class="form-control" type="text" name="searchPhone" id="searchPhone"
+        placeholder="Phone"
+      >
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <a href="" routerLink="/customer/new" class="btn btn-primary">
+      <i class="fas fa-plus-circle"></i> Add Customer
+    </a>
+  </div>
+
+</div>
+<!-- ... ... ... -->
+
+<div class="row mt-3">
+  <div class="col-12">
+    <div class="table-responsive-md">
+      <table
+        *ngIf="customers; else noCustomers"
+        class="table table table-striped table-sm-responsive">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Address</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr
+          (mouseenter)="showOnHover($event)"
+          (mouseleave)="hideOnLeave($event)"
+          *ngFor="let customer of customers; let ind = index"
+        >
+          <!-- ... ... ... -->
+          <td>
+            {{ind + 1}}
+            <span class="invisible">
+              <a
+                routerLink="/customer/{{customer.id}}"
+                href="" class="ml-3 text-secondary"
+              >
+                <i class="fas fa-eye"></i>
+              </a>
+              <a routerLink="/customer/{{customer.id}}/edit"
+                 href="" class="ml-3 text-secondary"
+              >
+                <i class="fas fa-pen"></i>
+              </a>
+              <a
+                (click)="onDeleteCustomer(customer.id, $event)"
+                href="" class="ml-3 text-secondary"
+              >
+                <i class="fas fa-trash"></i>
+              </a>
+            </span>
+          </td>
+          <!-- ... ... ... -->
+          <td>{{customer.firstName}}</td>
+          <td>{{customer.lastName}}</td>
+          <td>{{customer.phone}}</td>
+          <td>{{customer.email}}</td>
+          <td>{{customer.address}}</td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+    <ng-template #noCustomers>
+      <p>No customers available</p>
+    </ng-template>
+  </div>
+</div>

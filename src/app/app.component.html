@@ -1,0 +1,52 @@
+<!-- Loader -->
+<div id="preloader">
+  <div id="status">
+    <div class="sk-three-bounce">
+      <div class="sk-child sk-bounce1"></div>
+      <div class="sk-child sk-bounce2"></div>
+      <div class="sk-child sk-bounce3"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Page Start -->
+<div id="wrapper">
+  <!-- Top Bar -->
+  <app-topnav
+    [isLoggedIn]="isLoggedIn"
+    [userEmail]="userEmail"
+  ></app-topnav>
+  <!-- Left Sidebar -->
+  <app-sidenav
+    [isLoggedIn]="isLoggedIn"
+  ></app-sidenav>
+  <!-- Right Content Start -->
+  <div class="content-page">
+    <div class="content">
+      <div class="page-content-wrapper">
+        <div class="container-fluid">
+          <!-- Flash messages -->
+          <flash-messages></flash-messages>
+          <!-- Routing Content -->
+          <router-outlet></router-outlet>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <app-footer
+      [isLoggedIn]="isLoggedIn"
+    ></app-footer>
+  </div>
+  <!-- Right Content End -->
+
+</div>
+<!-- Page End -->
+
+
+
+
+
+
+

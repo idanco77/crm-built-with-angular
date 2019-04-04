@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Marc Laval",
+    "email": "marc@gmail.com",
+    "birthday": "1975-01-14 00:00:00",
+    "phones": [
+      "039332233",
+      "0544449988"
+    ],
+    "image": "moshe.jpg"
+  },
+  {
+    "name": "Minko Gechev",
+    "email": "minko@gmail.com",
+    "birthday": "1987-04-12 00:00:00",
+    "phones": [
+      "0504845986"
+    ],
+    "image": "avi.jpg"
+  },
+  {
+    "name": "Misko Hevery",
+    "email": "misko@gmail.com",
+    "birthday": "1986-02-10 00:00:00",
+    "image": "raz.jpg"
+  },
+  {
+    "name": "Rado Kirov",
+    "email": "rado@gmail.com",
+    "birthday": "1989-12-10 00:00:00",
+    "phones": [
+      "0504845986",
+      "035556677",
+      "0523334455"
+    ],
+    "image": "yehuda.jpg"
+  }
+]

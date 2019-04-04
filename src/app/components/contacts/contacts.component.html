@@ -1,0 +1,67 @@
+<app-page-header [childHeaderTitle]="parentHeaderTitle" [childHeaderIcon]="parentHeaderIcon"></app-page-header>
+
+<div class="row" *ngIf="contactsLength > 0">
+  <div class="col-sm-8 col-md-6 col-lg-4">
+    <div class="mb-3">
+      <label for="search" class="sr-only">Search name</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+        <!-- ... ... ... -->
+        <input
+          (focusin)="onSearchFocus()"
+          (focusout)="onSearchFocus()"
+          [ngClass]="searchFieldClasses"
+          [(ngModel)]="searchNameText"
+          (keyup)="onKeyupSearch()"
+          type="text" class="form-control" id="search" placeholder="Search name"
+        >
+        <!-- ... ... ... -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-3">
+  <div class="col-12">
+    <div class="table-responsive-md">
+      <table *ngIf="contactsLength > 0; else noContacts" class="table table-striped table-sm-responsive">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Birthday</th>
+          <th>Phones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let contact of contacts; let x = index">
+          <td>{{x+1}}</td>
+          <!-- ... ... ... -->
+          <td>
+            <img
+              src="{{baseUrl}}/assets/images/{{ contact.image }}"
+              alt="" class="mr-3" width="50">
+            {{contact.name | cleanName}}
+          </td>
+          <!-- ... ... ... -->
+          <td>{{contact.email | lowercase}}</td>
+          <td>{{contact.birthday | date:'dd/MM/yyyy'}}</td>
+          <td>
+            <ul>
+              <li *ngFor="let phone of contact.phones">{{phone}}</li>
+            </ul>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <ng-template #noContacts>
+      <p><i>No Contacts Available</i></p>
+    </ng-template>
+  </div>
+</div>
