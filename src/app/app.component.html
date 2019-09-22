@@ -1,4 +1,3 @@
-<!-- Loader -->
 <div id="preloader">
   <div id="status">
     <div class="sk-three-bounce">
@@ -8,45 +7,26 @@
     </div>
   </div>
 </div>
-
-<!-- Page Start -->
-<div id="wrapper">
-  <!-- Top Bar -->
-  <app-topnav
-    [isLoggedIn]="isLoggedIn"
-    [userEmail]="userEmail"
-  ></app-topnav>
-  <!-- Left Sidebar -->
-  <app-sidenav
-    [isLoggedIn]="isLoggedIn"
-  ></app-sidenav>
-  <!-- Right Content Start -->
-  <div class="content-page">
-    <div class="content">
-      <div class="page-content-wrapper">
-        <div class="container-fluid">
-          <!-- Flash messages -->
+<div [id]="!isOpenLeft ? 'wrapper' : 'container'">
+  <app-topnav [isLoggedIn]="isLoggedIn" [userEmail]="userEmail"></app-topnav>
+  <app-sidenav *ngIf="!isOpenLeft" [isLoggedIn]="isLoggedIn"></app-sidenav>
+  <div [class]="!isOpenLeft ? 'content-page' : 'row'">
+    <div [class]="!isOpenLeft ? 'content' : 'col-12'">
+      <div [class]="!isOpenLeft ? 'page-content-wrapper' : ''">
+        <div [class]="!isOpenLeft ? 'container-fluid' : ''">
           <flash-messages></flash-messages>
-          <!-- Routing Content -->
           <router-outlet></router-outlet>
-
-
         </div>
       </div>
     </div>
-    <!-- Footer -->
-    <app-footer
-      [isLoggedIn]="isLoggedIn"
-    ></app-footer>
+    <app-footer *ngIf="!isOpenLeft" [isLoggedIn]="isLoggedIn"></app-footer>
   </div>
-  <!-- Right Content End -->
-
 </div>
-<!-- Page End -->
 
-
-
-
-
+<div class="row mx-2 px-2" *ngIf="isOpenLeft">
+  <div class="col-12 text-center bg-white">
+    <p>© {{ currentYear | date:'yyyy'}} Idan Cohen</p>
+  </div>
+</div>
 
 

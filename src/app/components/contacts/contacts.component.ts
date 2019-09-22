@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Contact} from '../../models/contact';
 import {Title} from '@angular/platform-browser';
 import {ContactsService} from '../../services/contacts.service';
-import {environment} from '../../../environments/environment';
 import * as _ from 'lodash';
+import {Subscription} from 'rxjs';
+import {ExpendScreenService} from '../../services/expend-screen.service';
 
 @Component({
   selector: 'app-contacts',
@@ -11,7 +12,7 @@ import * as _ from 'lodash';
   styleUrls: ['./contacts.component.css']
 })
 
-export class ContactsComponent implements OnInit {
+export class ContactsComponent implements OnInit, OnDestroy {
   searchFieldClasses: any;
   contacts: Array<Contact> = [];
   baseUrl: string;
@@ -20,8 +21,11 @@ export class ContactsComponent implements OnInit {
   searchNameText: string;
   parentHeaderTitle: string;
   parentHeaderIcon: string;
+  isOpenLeft: boolean;
+  private isOpenSub: Subscription;
 
-  constructor(private _titleService: Title, private _contactService: ContactsService) {
+  constructor(private titleService: Title, private contactService: ContactsService,
+              private expendScreenService: ExpendScreenService) {
   }
 
   ngOnInit() {
@@ -29,15 +33,16 @@ export class ContactsComponent implements OnInit {
       'form-control': true,
       'form-control-lg': false
     };
-    this._titleService.setTitle('IC-CRM | Contact');
-    // this.baseUrl = environment.baseUrl;
-    this._contactService.getContacts().subscribe((data: Array<Contact>) => {
+    this.titleService.setTitle('IC-CRM | Contact');
+    this.contactService.getContacts().subscribe((data: Array<Contact>) => {
       this.contactsCache = this.contacts = _.sortBy(data, ['name']);
       this.contactsLength = this.contacts.length;
     });
-
     this.parentHeaderTitle = ' Contacts';
     this.parentHeaderIcon = 'fas fa-envelope';
+    this.isOpenSub = this.expendScreenService.isOpenLeft.subscribe((isOpen: boolean) => {
+      this.isOpenLeft = isOpen;
+    });
   }
 
   onKeyupSearch() {
@@ -51,9 +56,11 @@ export class ContactsComponent implements OnInit {
 
   onSearchFocus() {
     this.searchFieldClasses['form-control-lg'] = !this.searchFieldClasses['form-control-lg'];
-
   }
 
+  ngOnDestroy() {
+    this.isOpenSub.unsubscribe();
+  }
 
 }
 

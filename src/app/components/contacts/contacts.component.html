@@ -1,5 +1,4 @@
 <app-page-header [childHeaderTitle]="parentHeaderTitle" [childHeaderIcon]="parentHeaderIcon"></app-page-header>
-
 <div class="row" *ngIf="contactsLength > 0">
   <div class="col-sm-8 col-md-6 col-lg-4">
     <div class="mb-3">
@@ -8,16 +7,9 @@
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
-        <!-- ... ... ... -->
-        <input
-          (focusin)="onSearchFocus()"
-          (focusout)="onSearchFocus()"
-          [ngClass]="searchFieldClasses"
-          [(ngModel)]="searchNameText"
-          (keyup)="onKeyupSearch()"
-          type="text" class="form-control" id="search" placeholder="Search name"
-        >
-        <!-- ... ... ... -->
+        <input (focusin)="onSearchFocus()" (focusout)="onSearchFocus()" [ngClass]="searchFieldClasses"
+               [(ngModel)]="searchNameText" (keyup)="onKeyupSearch()" type="text" class="form-control" id="search"
+               placeholder="Search name">
       </div>
     </div>
   </div>
@@ -39,7 +31,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let contact of contacts; let x = index">
-          <td>{{x+1}}</td>
+          <td>{{x + 1}}</td>
           <!-- ... ... ... -->
           <td>
             <img

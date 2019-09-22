@@ -1,4 +1,4 @@
-<div class="row mt-5">
+<div [class]="!isOpenLeft ? 'row mt-5' : 'row mt-5 pt-5'">
   <div class="col-12">
     <div class="jumbotron py-3">
       <h3><i [ngClass]="childHeaderIcon"></i> {{childHeaderTitle}}</h3>
